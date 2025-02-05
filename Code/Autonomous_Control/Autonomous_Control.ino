@@ -1,20 +1,12 @@
 //Autonomous Car Project
 //Autonomous Control Script
 //Harrison I. L. Milburn
-//07.04.2024
+//05.02.2025
 //Arduino Uno Rev3
 
-//Setup variables for the speed pins
-int leftSpeedPin = 10;    //ENA
-int rightSpeedPin = 5;    //ENB
+#include "Arduino.h"
+#include "Functions.h"
 
-//Setup variables for the direction
-int leftCwPin = 9;        //IN1
-int leftCcwPin = 8;       //IN2
-int rightCwPin = 7;       //IN3
-int rightCcwPin = 6;      //IN4
-
-//Setup variables for Ultrasonic Sensor Pins
 int trigPin = 3;            // Trigger pin
 int echoPin = 4;            // Echo pin
 
@@ -32,6 +24,7 @@ void setup() {
 }
 
 void loop() {
+
     long duration, distance; // Variables to store the duration of sound wave travel and calculated distance
     digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
@@ -53,7 +46,6 @@ void loop() {
         delay(200);
 
         left(220);
-        left(220);
         delay(300);
 
         stop();
@@ -63,67 +55,4 @@ void loop() {
     else{
         forwards(200);
     }
-}
-
-
-
-void forwards(int speed){
-    //Left Clockwise
-    digitalWrite(leftCwPin, HIGH);
-    digitalWrite(leftCcwPin, LOW);
-
-    //Right Clockwise
-    digitalWrite(rightCwPin, HIGH);
-    digitalWrite(rightCcwPin, LOW);
-
-    //Output Speed
-    analogWrite(leftSpeedPin, speed);
-    analogWrite(rightSpeedPin, speed);
-}
-
-void backwards(int speed){
-    //Left Counter-Clockwise
-    digitalWrite(leftCwPin, LOW);
-    digitalWrite(leftCcwPin, HIGH);
-
-    //Right Counter-Clockwise
-    digitalWrite(rightCwPin, LOW);
-    digitalWrite(rightCcwPin, HIGH);
-
-    //Output Speed
-    analogWrite(leftSpeedPin, speed);
-    analogWrite(rightSpeedPin, speed);
-}
-
-void left(int speed){
-    //Left Counter-Clockwise
-    digitalWrite(leftCwPin, LOW);
-    digitalWrite(leftCcwPin, HIGH);
-
-    //Right Clockwise
-    digitalWrite(rightCwPin, HIGH);
-    digitalWrite(rightCcwPin, LOW);
-
-    //Output Speed
-    analogWrite(leftSpeedPin, speed);
-    analogWrite(rightSpeedPin, speed);
-}
-
-void right(int speed){
-    //Left Clockwise
-    digitalWrite(leftCwPin, HIGH);
-    digitalWrite(leftCcwPin, LOW);
-
-    //Right Counter-Clockwise
-    digitalWrite(rightCwPin, LOW);
-    digitalWrite(rightCcwPin, HIGH);
-
-    //Output Speed
-    analogWrite(leftSpeedPin, speed);
-    analogWrite(rightSpeedPin, speed);
-}
-
-void stop(){
-    analogWrite(leftSpeedPin, 0);
-    analogWrite(rightSpeedPin, 0);
 }
